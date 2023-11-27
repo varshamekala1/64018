@@ -1,0 +1,103 @@
+---
+title: "QMM Goal Programming"
+author: "Varsha Karunya Mekala"
+date: "2023-11-26"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+****
+
+#Summary
+
+1) The optimal production plan is achieved by producing the no. of units of each product. 
+
+Product 1(x1) = 0 units
+
+Product 2(x2) = 0 units
+
+Product 3(x3) = 15 units.
+
+Taking the contraints into account, this maximizes the profit.
+
+2) The management exceeded its targeted employment level by 25 hundred employees. Even though there were penalties for surpassing the target, the profit-maximizing production plan balanced those costs.
+
+3) The optimization model solution indicates that the management can make up to $225 million in profit. This is the maximum profit level that can be achieved within the given parameters and business conditions. 
+
+****
+
+#Problem Statement
+
+The Research and Development Division of the Emax Corporation has developed three new products. A decision now needs to be made on which mix of these products should be produced. Management wants primary consideration given to three factors: total profit, stability in the workforce, and achieving an increase in the company’s earnings next year from the $75 million achieved this year. In particular, using the units given in the following table, they want to Maximize Z = P - 6C - 3D, where P = total (discounted) profit over the life of the new products, C = change (in either direction) in the current level of employment, D = decrease (if any) in next year’s earnings from the current year’s level. The amount of any increase in earnings does not enter into Z, because management is concerned primarily with just achieving some increase to keep the stockholders happy. (It has mixed feelings about a large increase that then would be difficult to surpass in subsequent years.) 
+
+1. Define y1+ and y1-, respectively, as the amount over (if any) and the amount under (if any) the employment level goal. Define y2+ and y2- in the same way for the goal regarding earnings next year. Define x1, x2, and x3 as the production rates of Products 1, 2, and 3, respectively. With these definitions, use the goal programming technique to express y1+, y1- , y2+ and y2- algebraically in terms of x1, x2, and x3. Also express P in terms of x1, x2, and x3.
+2. Express management’s objective function in terms of x1, x2, x3, y1+, y1- , y2+ and y2-.
+3. Formulate and solve the linear programming model. What are your findings?
+
+****
+
+#Solution 
+
+**1. Define y1+ and y1-, respectively, as the amount over (if any) and the amount under (if any) the employment level goal. Define y2+ and y2- in the same way for the goal regarding earnings next year. Define x1, x2, and x3 as the production rates of Products 1, 2, and 3, respectively. With these definitions, use the goal programming technique to express y1+, y1- , y2+ and y2- algebraically in terms of x1, x2, and x3. Also express P in terms of x1, x2, and x3.**
+
+**Objective function**
+
+The objective is to maximize,
+
+max: 20 x1 + 15 x2 + 25 x3 - 6 y1a - 6 y1b - 3 y2a - 3 y2b;
+
+**Constraints**
+
+subject to
+
+50 = 6 x1 + 4 x2 + 5 x3 - y1a + y1b;
+
+75 = 8 x1 + 7 x2 + 5 x3 + y2b - y2a;
+
+y1a >= 0;
+y1b >= 0;
+y2a >= 0;
+y2b >= 0;
+
+x1 >= 0;
+x2 >= 0;
+x3 >= 0;
+
+**Decision Variables**
+
+x1 is the production rate of the product 1,
+x2 is the production rate of the product 2,
+x3 is the production rate of the product 3,
+
+y1a(y1+) is the variable for the employment level goal, indicating the amount over the goal.
+y1b(y1-) is the variable for the employment level goal, indicating the amount under the goal.
+y2a(y2+) is the variable for the earnings next year goal, indicating the amount over the goal.
+y2b(y2-) is the variable for the earnings next year goal, indicating the amount under the goal.
+
+Representing P in terms of x1, x2, x3 
+
+P = 20 x1 + 15 x2 + 25 x3;
+
+****
+
+**2. Express management’s objective function in terms of x1, x2, x3, y1+, y1- , y2+ and y2-.**
+
+The management's objective function is max: 20 x1 + 15 x2 + 25 x3 - 6 y1a - 6 y1b - 3 y2a - 3 y2b;
+
+****
+
+**3. Formulate and solve the linear programming model. What are your findings?**
+
+```{r}
+library(lpSolveAPI)
+x <- read.lp("varshaqmm.lp")
+x
+solve(x)
+get.objective(x)
+get.variables(x)
+get.constraints(x)
+```
+
+****
+
